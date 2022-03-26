@@ -19,7 +19,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "."
-        target: "/var/www/mywebsite"
+        target: "/apps/pernpost/PERN-post/client"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
