@@ -19,7 +19,7 @@ jobs:
         KEY: ${{ secrets.SSHKEY }}
       with:
         source: "."
-        target: "/apps/pernpost/PERN-post/client"
+        target: "/apps/pernpost/PERN-post/"
 
     - name: Executing remote command
       uses: appleboy/ssh-action@master
@@ -28,4 +28,9 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: npm run build
+        script: 
+        cd /client/
+        npm run build
+        cd ..
+        cd /server/
+        cd ..
