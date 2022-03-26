@@ -28,4 +28,7 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: ls -la
+        script: | 
+        cd client
+        git fetch origin
+        git reset --hard origin/main
