@@ -8,7 +8,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
 
   const deletePost = async (id) => {
     try {
-      await fetch(`/posts/${id}`, {
+      await fetch(`/api/posts/${id}`, {
         method: "DELETE",
       });
       update ? setUpdate(false) : setUpdate(true);
@@ -22,7 +22,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
 
   const getPosts = async () => {
     try {
-      const response = await fetch("/posts");
+      const response = await fetch("/api/posts");
       const jsonData = await response.json();
       setPosts(jsonData);
     } catch (err) {
