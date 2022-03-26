@@ -3,6 +3,7 @@ import MakePost from "../components/MakePost";
 import Navbar from "../components/Navbar";
 import { Toaster } from "react-hot-toast";
 
+//testing pipeline
 const Home = ({ dark, setDark, update, setUpdate }) => {
   return (
     <>
