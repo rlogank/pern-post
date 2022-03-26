@@ -26,7 +26,9 @@ const Welcome = ({ dark }) => {
           </div>
           <p>
             PERN stands for PostgreSQL, Express, React, and Node - which are
-            what this application was made with.
+            what this application was made with.<br/><br/>
+
+            Feel free to create/edit/delete posts, I just ask that you leave some posts behind!
           </p>
         </div>
       )}
