@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter basename="/pern-post">
+    <BrowserRouter basename="/pern">
       <App />
     </BrowserRouter>
   </React.StrictMode>,
