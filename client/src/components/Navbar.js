@@ -6,7 +6,7 @@ const Navbar = ({ dark, setDark }) => {
       className={
         dark
           ? "mb-3 bg-slate-800 py-3 tracking-tight text-slate-100 transition"
-          : "mb-3 bg-white py-3 tracking-tight transition"
+          : "mb-3 bg-black py-3 tracking-tight transition"
       }
     >
       <div className="mx-auto flex max-w-md items-center justify-between px-3">
