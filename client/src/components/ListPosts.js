@@ -12,7 +12,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
 
   // Initialize websocket connection
   const startWebsocketConnection = () => {
-    const socket = new window.WebSocket("ws://rlogank.com/api/post");
+    const socket = new window.WebSocket("/api/post");
     // Connection opened
     socket.addEventListener("open", function (event) {
       socket.send("Client: Requesting data from server...");
