@@ -49,6 +49,19 @@ app.post("/posts", async (req, res) => {
   }
 });
 
+
+// Get all posts with SELECT *
+app.get("/posts", async (req, res) => {
+  try {
+    const allPosts = await pool.query(
+      "SELECT * FROM post ORDER BY post_id DESC LIMIT 10"
+    );
+    res.json(allPosts.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 // Get a single post with SELECT WHERE
 app.get("/posts/:id", async (req, res) => {
   try {

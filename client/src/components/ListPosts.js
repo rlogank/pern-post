@@ -28,7 +28,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
 
   const deletePost = async (id) => {
     try {
-      await fetch(`/api/posts/${id}`, {
+      await fetch(`/api/posts/${id}/`, {
         method: "DELETE",
       });
       update ? setUpdate(false) : setUpdate(true);
