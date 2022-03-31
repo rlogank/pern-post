@@ -54,7 +54,7 @@ app.post("/posts", async (req, res) => {
 app.get("/posts", async (req, res) => {
   try {
     const allPosts = await pool.query(
-      "SELECT * FROM post ORDER BY post_id DESC LIMIT 10"
+      "SELECT * FROM post ORDER BY post_id DESC LIMIT 50"
     );
     res.json(allPosts.rows);
   } catch (err) {

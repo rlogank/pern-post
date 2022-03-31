@@ -11,7 +11,7 @@ export default function Modal({ post, update, setUpdate, dark }) {
   const updateText = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`http://127.0.0.1:4000/api/posts/${post.post_id}`, {
+      await fetch(`/api/posts/${post.post_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ body: text }),

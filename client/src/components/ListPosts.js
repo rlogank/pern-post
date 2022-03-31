@@ -12,7 +12,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
 
   // Initialize websocket connection
   const startWebsocketConnection = () => {
-    const socket = new window.WebSocket("ws://127.0.0.1:4000/post");
+    const socket = new window.WebSocket("/api/post");
     // Connection opened
     socket.addEventListener("open", function (event) {
       socket.send("Client: Requesting data from server...");
@@ -28,7 +28,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
 
   const deletePost = async (id) => {
     try {
-      await fetch(`http://127.0.0.1:4000/api/posts/${id}/`, {
+      await fetch(`/api/posts/${id}`, {
         method: "DELETE",
       });
       update ? setUpdate(false) : setUpdate(true);
