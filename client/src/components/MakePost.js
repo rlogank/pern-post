@@ -8,13 +8,12 @@ function MakePost({ setUpdate, update, dark }) {
   const submitPost = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("/api/posts/", {
+      const response = await fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ body: text }),
       });
       update ? setUpdate(false) : setUpdate(true);
-      console.log(response);
       toast.success("Post successful!");
       setText("");
     } catch (err) {

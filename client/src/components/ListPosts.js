@@ -6,6 +6,26 @@ import EditPost from "./EditPost";
 const ListPosts = ({ setUpdate, update, dark }) => {
   const [posts, setPosts] = useState([]);
 
+  useEffect(() => {
+    startWebsocketConnection();
+  }, [update]);
+
+  // Initialize websocket connection
+  const startWebsocketConnection = () => {
+    const socket = new window.WebSocket("/api/post");
+    // Connection opened
+    socket.addEventListener("open", function (event) {
+      socket.send("Client: Requesting data from server...");
+    });
+
+    // Listen for messages
+    socket.addEventListener("message", async function (e) {
+      const response = await e.data;
+      const array = JSON.parse(response);
+      setPosts(array);
+    });
+  };
+
   const deletePost = async (id) => {
     try {
       await fetch(`/api/posts/${id}`, {
@@ -19,21 +39,6 @@ const ListPosts = ({ setUpdate, update, dark }) => {
       console.log(err.message);
     }
   };
-
-  const getPosts = async () => {
-    try {
-      const response = await fetch("/api/posts");
-      const jsonData = await response.json();
-      setPosts(jsonData);
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-  useEffect(() => {
-    getPosts();
-    console.log("updated");
-  }, [update]);
 
   return (
     <>

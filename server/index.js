@@ -1,16 +1,41 @@
 const express = require("express");
+var expressWs = require("express-ws");
 const app = express();
 const cors = require("cors");
 const pool = require("./db");
-require('dotenv').config()
+require("dotenv").config();
 
 // middleware
 app.use(cors());
 app.use(express.json());
 
-// ROUTES
+// Initialize WS
+expressWs(app);
 
-// create a post with INSERT INTO
+// Create a new 'connection set' to hold each clients socket connection
+const connections = new Set();
+
+// Define handler, called on when new WS connection is made
+const wsHandler = (ws) => {
+  connections.add(ws);
+
+  ws.on("message", async () => {
+    const allPosts = await pool.query(
+      "SELECT * FROM post ORDER BY post_id DESC LIMIT 10"
+    );
+    connections.forEach((conn) => {
+      conn.send(JSON.stringify(allPosts.rows));
+    });
+  });
+  ws.on("close", () => {
+    connections.delete(ws);
+  });
+};
+
+app.ws("/post", wsHandler);
+
+// ROUTES
+// Create a post with INSERT INTO
 app.post("/posts", async (req, res) => {
   try {
     const { body } = req.body;
@@ -24,17 +49,7 @@ app.post("/posts", async (req, res) => {
   }
 });
 
-// get all posts with SELECT *
-app.get("/posts", async (req, res) => {
-  try {
-    const allPosts = await pool.query("SELECT * FROM post ORDER BY post_id DESC LIMIT 10");
-    res.json(allPosts.rows);
-  } catch (err) {
-    console.error(err.message);
-  }
-});
-
-// get a single post with SELECT WHERE
+// Get a single post with SELECT WHERE
 app.get("/posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -47,34 +62,34 @@ app.get("/posts/:id", async (req, res) => {
   }
 });
 
-// update a post with UPDATE WHERE
+// Update a post with UPDATE WHERE
 app.put("/posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { body } = req.body;
-    const updatePost = await pool.query(
-      "UPDATE post SET body = $1 WHERE post_id = $2",
-      [body, id]
-    );
+    await pool.query("UPDATE post SET body = $1 WHERE post_id = $2", [
+      body,
+      id,
+    ]);
     res.json("Post updated");
   } catch (err) {
     console.error(err.message);
   }
 });
 
-// delete a post with DELETE WHERE
+// Delete a post with DELETE WHERE
 app.delete("/posts/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deletePost = await pool.query("DELETE FROM post WHERE post_id = $1", [
-      id,
-    ]);
+    await pool.query("DELETE FROM post WHERE post_id = $1", [id]);
     res.json("Post deleted");
   } catch (err) {
     console.error(err.message);
   }
 });
-const port = process.env.PORT || 4001
+
+// Host the static files in the build directory
+const port = process.env.PORT || 4001;
 app.listen(port, () => {
-  console.log(`Server up and listening on port ${port}.`)
+  console.log(`Server up and listening on port ${port}.`);
 });

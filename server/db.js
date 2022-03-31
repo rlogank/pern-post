@@ -1,6 +1,5 @@
 // env vars
-require('dotenv').config()
-console.log(process.env.PGUSER)
+require("dotenv").config();
 
 // get pool from postgresql library
 const Pool = require("pg").Pool;
