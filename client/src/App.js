@@ -52,7 +52,7 @@ function App() {
           />
         </Route>
         <Route path="/s/">
-          <PostList dark={dark} />
+          <PostList dark={dark} setUpdate={setUpdate} update={update} />
         </Route>
       </Switch>
     </div>

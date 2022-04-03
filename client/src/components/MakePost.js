@@ -1,22 +1,24 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Welcome from "./Welcome";
-import {useLocation} from 'react-router-dom'
+import { useLocation } from "react-router-dom";
 
-function MakePost({ setUpdate, update, dark }) {
+function MakePost({ dark }) {
   const [text, setText] = useState("");
-  const location = useLocation()
-const currentSection = location.pathname.replace("/s/", "")
-console.log(currentSection)
+  const location = useLocation();
+  const currentSection = location.pathname.replace("/s/", "");
+
+
   const submitPost = async (e) => {
     e.preventDefault();
     try {
-      await fetch("/api/posts", {
+      await fetch("https://rlogank.com/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ body: text, username: "Logan", section: currentSection }),
+        body: JSON.stringify({
+          body: text
+        }),
       });
-      update ? setUpdate(false) : setUpdate(true);
       toast.success("Post successful!");
       setText("");
     } catch (err) {

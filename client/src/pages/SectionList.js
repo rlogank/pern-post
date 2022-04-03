@@ -2,7 +2,6 @@ import { Toaster } from "react-hot-toast";
 import { FaClock, FaUser } from "react-icons/fa";
 import Activity from "../components/Activity";
 import { Link } from "react-router-dom";
-import SectionWrapper from "../wrappers/SectionWrapper";
 
 const sections = [
   {
@@ -39,7 +38,7 @@ const sections = [
   },
 ];
 
-const SectionList = ({ dark, update, setUpdate }) => {
+const SectionList = ({ dark }) => {
   return (
     <>
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-3 px-3 lg:flex-row">

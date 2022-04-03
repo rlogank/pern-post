@@ -4,7 +4,7 @@ import { Toaster } from "react-hot-toast";
 import Activity from "../components/Activity";
 import { useLocation } from "react-router-dom";
 
-const PostList = ({ dark, update, setUpdate }) => {
+const PostList = ({ dark }) => {
   return (
     <div className="mx-auto flex flex-col lg:flex-row w-full max-w-5xl gap-3 px-3">
       <div className="lg:w-2/5">
@@ -18,8 +18,8 @@ const PostList = ({ dark, update, setUpdate }) => {
         }
       >
         <div className="mx-auto max-w-5xl">
-          <MakePost dark={dark} update={update} setUpdate={setUpdate} />
-          <ListPosts dark={dark} update={update} setUpdate={setUpdate} />
+          <MakePost dark={dark} />
+          <ListPosts dark={dark}  />
         </div>
       </div>
       {dark ? (

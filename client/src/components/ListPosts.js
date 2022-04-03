@@ -3,16 +3,18 @@ import toast from "react-hot-toast";
 import { FaTrash } from "react-icons/fa";
 import EditPost from "./EditPost";
 
-const ListPosts = ({ setUpdate, update, dark }) => {
+const ListPosts = ({ dark }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     startWebsocketConnection();
-  }, [update]);
+    console.log("starting...")
+  }, []);
 
   // Initialize websocket connection
   const startWebsocketConnection = () => {
     const socket = new window.WebSocket("wss://rlogank.com/api/post");
+    console.log("connection opened")
     // Connection opened
     socket.addEventListener("open", function (event) {
       socket.send("Client: Requesting data from server...");
@@ -23,6 +25,7 @@ const ListPosts = ({ setUpdate, update, dark }) => {
       const response = await e.data;
       const array = JSON.parse(response);
       setPosts(array);
+      console.log(posts)
     });
   };
 
@@ -31,7 +34,6 @@ const ListPosts = ({ setUpdate, update, dark }) => {
       await fetch(`/api/posts/${id}`, {
         method: "DELETE",
       });
-      update ? setUpdate(false) : setUpdate(true);
       toast.error("Your old post says his goodbyes.", {
         icon: "😢",
       });
@@ -56,8 +58,6 @@ const ListPosts = ({ setUpdate, update, dark }) => {
             <div className="flex items-center gap-3 self-center text-3xl">
               <EditPost
                 dark={dark}
-                update={update}
-                setUpdate={setUpdate}
                 post={post}
               />
               <button

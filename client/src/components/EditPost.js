@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import Modal from "./Modal";
 
-const EditPost = ({ post, setPost, update, setUpdate, dark }) => {
+const EditPost = ({ post, setPost, dark }) => {
   const [modal, setModal] = useState(false);
   return (
     <>
@@ -11,8 +11,6 @@ const EditPost = ({ post, setPost, update, setUpdate, dark }) => {
           dark={dark}
           post={post}
           setPost={setPost}
-          update={update}
-          setUpdate={setUpdate}
         />
       )}
       <button
