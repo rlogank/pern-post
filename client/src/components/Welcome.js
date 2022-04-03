@@ -9,8 +9,8 @@ const Welcome = ({ dark }) => {
         <div
           className={
             dark
-              ? "w-full justify-between rounded-md bg-slate-800 p-5 text-slate-100"
-              : "w-full justify-between rounded-md bg-emerald-600 p-5 text-slate-100"
+              ? "w-full justify-between rounded-md bg-slate-800 p-5 text-slate-100 mb-3"
+              : "w-full justify-between rounded-md bg-emerald-600 p-5 text-slate-100 mb-3"
           }
         >
           <div className="mb-3 flex items-center justify-between">
@@ -25,10 +25,6 @@ const Welcome = ({ dark }) => {
             </button>
           </div>
           <p>
-            PERN stands for PostgreSQL, Express, React, and Node - which are
-            what this application was made with.
-            <br />
-            <br />
             Feel free to create/edit/delete posts, I just ask that you leave
             some posts behind!
           </p>

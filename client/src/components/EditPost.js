@@ -26,8 +26,8 @@ const EditPost = ({ post, setPost, update, setUpdate, dark }) => {
         <FaEdit
           className={
             dark
-              ? "cursor-pointer rounded-md bg-slate-700 p-2 text-3xl transition hover:bg-opacity-75 active:bg-opacity-50 "
-              : "cursor-pointer rounded-md bg-slate-900 bg-opacity-5 p-2 text-3xl transition hover:bg-opacity-10 active:bg-opacity-[15%]"
+              ? "cursor-pointer rounded-md bg-slate-700 hover:bg-opacity-75 active:bg-opacity-50 p-2 text-3xl transition "
+              : "cursor-pointer rounded-md bg-slate-900 bg-opacity-5 hover:bg-opacity-10 active:bg-opacity-[15%] p-2 text-3xl transition"
           }
         />
       </button>

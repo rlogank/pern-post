@@ -1,20 +1,23 @@
 import ListPosts from "../components/ListPosts";
 import MakePost from "../components/MakePost";
-import Navbar from "../components/Navbar";
 import { Toaster } from "react-hot-toast";
+import Activity from "../components/Activity";
+import { useLocation } from "react-router-dom";
 
-const Home = ({ dark, setDark, update, setUpdate }) => {
+const PostList = ({ dark, update, setUpdate }) => {
   return (
-    <>
+    <div className="mx-auto flex flex-col lg:flex-row w-full max-w-5xl gap-3 px-3">
+      <div className="lg:w-2/5">
+        <Activity dark={dark} />
+      </div>
       <div
         className={
           dark
-            ? "min-h-screen w-full bg-slate-700 transition"
-            : "min-h-screen w-full bg-slate-100 text-neutral-600 transition"
+            ? "min-h-screen lg:w-3/4 transition"
+            : "min-h-screen lg:w-3/4 text-gray-700 transition"
         }
       >
-        <Navbar dark={dark} setDark={setDark} />
-        <div className="mx-auto max-w-md px-3">
+        <div className="mx-auto max-w-5xl">
           <MakePost dark={dark} update={update} setUpdate={setUpdate} />
           <ListPosts dark={dark} update={update} setUpdate={setUpdate} />
         </div>
@@ -31,8 +34,8 @@ const Home = ({ dark, setDark, update, setUpdate }) => {
       ) : (
         <Toaster />
       )}
-    </>
+    </div>
   );
 };
 
-export default Home;
+export default PostList;
