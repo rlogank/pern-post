@@ -3,7 +3,7 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import toast from "react-hot-toast";
 
-export default function Modal({ post, dark }) {
+export default function Modal({ post, update, setUpdate, dark }) {
   const [text, setText] = useState(post.body);
   const [open, setOpen] = useState(true);
   const cancelButtonRef = useRef(null);
@@ -18,6 +18,7 @@ export default function Modal({ post, dark }) {
       });
       toast.success("Post updated!");
       setText("");
+      update ? setUpdate(false) : setUpdate(true);
     } catch (err) {
       console.log(err.message);
     }

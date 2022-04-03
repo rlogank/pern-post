@@ -1,24 +1,19 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import Welcome from "./Welcome";
-import { useLocation } from "react-router-dom";
 
-function MakePost({ dark }) {
+function MakePost({ setUpdate, update, dark }) {
   const [text, setText] = useState("");
-  const location = useLocation();
-  const currentSection = location.pathname.replace("/s/", "");
-
 
   const submitPost = async (e) => {
     e.preventDefault();
     try {
-      await fetch("https://rlogank.com/api/posts", {
+      await fetch("/api/posts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          body: text
-        }),
+        body: JSON.stringify({ body: text }),
       });
+      update ? setUpdate(false) : setUpdate(true);
       toast.success("Post successful!");
       setText("");
     } catch (err) {
@@ -28,8 +23,8 @@ function MakePost({ dark }) {
 
   return (
     <>
-      {/* <Welcome dark={dark} /> */}
-      <form onSubmit={submitPost} className="flex w-full gap-3">
+      <Welcome dark={dark} />
+      <form onSubmit={submitPost} className="mt-3 flex w-full gap-3">
         <input
           className={
             dark

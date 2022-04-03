@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import Modal from "./Modal";
 
-const EditPost = ({ post, setPost, dark }) => {
+const EditPost = ({ post, setPost, update, setUpdate, dark }) => {
   const [modal, setModal] = useState(false);
   return (
     <>
@@ -11,6 +11,8 @@ const EditPost = ({ post, setPost, dark }) => {
           dark={dark}
           post={post}
           setPost={setPost}
+          update={update}
+          setUpdate={setUpdate}
         />
       )}
       <button
@@ -24,8 +26,8 @@ const EditPost = ({ post, setPost, dark }) => {
         <FaEdit
           className={
             dark
-              ? "cursor-pointer rounded-md bg-slate-700 hover:bg-opacity-75 active:bg-opacity-50 p-2 text-3xl transition "
-              : "cursor-pointer rounded-md bg-slate-900 bg-opacity-5 hover:bg-opacity-10 active:bg-opacity-[15%] p-2 text-3xl transition"
+              ? "cursor-pointer rounded-md bg-slate-700 p-2 text-3xl transition hover:bg-opacity-75 active:bg-opacity-50 "
+              : "cursor-pointer rounded-md bg-slate-900 bg-opacity-5 p-2 text-3xl transition hover:bg-opacity-10 active:bg-opacity-[15%]"
           }
         />
       </button>
