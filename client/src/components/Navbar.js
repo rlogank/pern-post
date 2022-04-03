@@ -20,7 +20,7 @@ const Navbar = ({ dark, setDark, setSlider, slider, setType }) => {
     >
       <div className="mx-auto flex max-w-5xl items-center justify-between px-3">
         <Link to="/" className="text-2xl font-extrabold">
-          PWF
+          PERN Post
         </Link>
         <div className="flex gap-3">
           <button
