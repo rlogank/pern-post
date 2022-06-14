@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Welcome from "./Welcome";
 
@@ -6,8 +6,8 @@ function MakePost({ setUpdate, update, dark }) {
   const [text, setText] = useState("");
 
   const submitPost = async (e) => {
-    e.preventDefault();
-    if (text) {
+    if (text.length > 3) {
+      e.preventDefault();
       try {
         await fetch("/api/posts", {
           method: "POST",
@@ -21,17 +21,17 @@ function MakePost({ setUpdate, update, dark }) {
         console.log(err.message);
       }
     } else {
-      toast.error("Please type something.");
+      e.preventDefault();
+      toast.error("Too short!");
     }
   };
-
+  useEffect(() => {
+    console.log(text.length);
+  }, [text]);
   return (
     <>
       <Welcome dark={dark} />
-      <form
-        onSubmit={text ? submitPost : toast.error("Please type something.")}
-        className="mt-3 flex w-full gap-3"
-      >
+      <form onSubmit={submitPost} className="mt-3 flex w-full gap-3">
         <input
           className={
             dark
@@ -42,7 +42,9 @@ function MakePost({ setUpdate, update, dark }) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
+
         <button
+          type="submit"
           className={
             dark
               ? "inline-flex items-center justify-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-slate-100 shadow-sm transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
