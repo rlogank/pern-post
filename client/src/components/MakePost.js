@@ -7,24 +7,31 @@ function MakePost({ setUpdate, update, dark }) {
 
   const submitPost = async (e) => {
     e.preventDefault();
-    try {
-      await fetch("/api/posts", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ body: text }),
-      });
-      update ? setUpdate(false) : setUpdate(true);
-      toast.success("Post successful!");
-      setText("");
-    } catch (err) {
-      console.log(err.message);
+    if (text) {
+      try {
+        await fetch("/api/posts", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ body: text }),
+        });
+        update ? setUpdate(false) : setUpdate(true);
+        toast.success("Post successful!");
+        setText("");
+      } catch (err) {
+        console.log(err.message);
+      }
+    } else {
+      toast.error("Please type something.");
     }
   };
 
   return (
     <>
       <Welcome dark={dark} />
-      <form onSubmit={submitPost} className="mt-3 flex w-full gap-3">
+      <form
+        onSubmit={text ? submitPost : toast.error("Please type something.")}
+        className="mt-3 flex w-full gap-3"
+      >
         <input
           className={
             dark

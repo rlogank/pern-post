@@ -49,7 +49,6 @@ app.post("/posts", async (req, res) => {
   }
 });
 
-
 // Get all posts with SELECT *
 app.get("/posts", async (req, res) => {
   try {

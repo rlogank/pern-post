@@ -1,7 +1,6 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { XIcon } from "@heroicons/react/outline";
 import Login from "../user/Login";
 import Signup from "../user/Signup";
 import { FaTimes } from "react-icons/fa";
@@ -45,7 +44,7 @@ export default function SliderWrapper({ slider, setSlider, type, dark }) {
                           type="button"
                           className={
                             dark
-                              ? "rounded-md hover:bg-slate-700 p-3 text-sm transition hover:bg-opacity-75 focus:outline-none focus:ring-0 active:bg-opacity-50"
+                              ? "rounded-md p-3 text-sm transition hover:bg-slate-700 hover:bg-opacity-75 focus:outline-none focus:ring-0 active:bg-opacity-50"
                               : "rounded-md bg-slate-900 bg-opacity-0 p-3 text-sm transition hover:bg-opacity-10 focus:outline-none focus:ring-0 active:bg-opacity-[15%]"
                           }
                           onClick={() => setSlider(false)}
